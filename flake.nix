@@ -1,49 +1,54 @@
 {
   description = "Python environment for advent of code 2024";
 
-  # Flake inputs
   inputs = {
-    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.2405.*.tar.gz";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
-  # Flake outputs
-  outputs = { self, nixpkgs }:
-    let
-      # Systems supported
-      allSystems = [
-        "x86_64-linux" # 64-bit Intel/AMD Linux
-        "aarch64-linux" # 64-bit ARM Linux
-        "x86_64-darwin" # 64-bit Intel macOS
-        "aarch64-darwin" # 64-bit ARM macOS
-      ];
+  outputs = { self, nixpkgs, flake-utils }:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+        python = pkgs.python312;
+      in
+      {
+        devShells.default = pkgs.mkShell {
+          buildInputs = with pkgs; [
+            # Python and uv package management
+            python
+            uv
 
-      # Helper to provide system-specific attributes
-      forAllSystems = f: nixpkgs.lib.genAttrs allSystems (system: f {
-        pkgs = import nixpkgs { inherit system; };
-      });
-    in
-    {
-      # Development environment output
-      devShells = forAllSystems ({ pkgs }: {
-        default =
-          let
-            # Use Python 3.12
-            python = pkgs.python312;
-          in
-          pkgs.mkShell {
-            # The Nix packages provided in the environment
-            packages = [
-              # Python plus helper tools
-              (python.withPackages (ps: with ps; [
-                virtualenv # Virtualenv
-                pip # The pip installer
-              ]))
-            ];
-            shellHook = ''
-              echo "🐍 You're entering a dev environment! 🐍"
-              source python-nix-venv/bin/activate
-            '';
-          };
-      });
-    };
+            # Development tools
+            ruff # Fast Python linter and formatter
+            pre-commit
+
+            # Language server
+            python.pkgs.python-lsp-server
+
+            # C++ standard library for numpy and scipy
+            stdenv.cc.cc.lib
+          ];
+
+          shellHook = ''
+            # Add C++ standard library to LD_LIBRARY_PATH for numpy/scipy
+            export LD_LIBRARY_PATH="${pkgs.stdenv.cc.cc.lib}/lib:$LD_LIBRARY_PATH"
+
+            echo "🐍 Python development environment with uv 🐍"
+            echo "Python version: $(python --version)"
+            echo "uv version: $(uv --version)"
+            echo ""
+
+            # Auto-activate virtual environment if it exists
+            if [ -d ".venv" ]; then
+              echo "✓ Activating virtual environment (.venv)"
+              source .venv/bin/activate
+            else
+              echo "ℹ No virtual environment found. Create one with:"
+              echo "  uv sync    # Creates venv, lockfile, and installs dependencies"
+            fi
+          '';
+        };
+      }
+    );
 }

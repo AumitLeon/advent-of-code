@@ -16,7 +16,6 @@ dependencies = [
 
 [tool.pytest.ini_options]
 addopts = "--import-mode=importlib"
-testpaths = ["2024"]
 
 [tool.ruff]
 line-length = 100

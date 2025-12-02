@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import List, Tuple, Dict
+from typing import Dict, List, Tuple
 
 
 def parse_input() -> Tuple[List[List[int]], List[Tuple[int, int]]]:
@@ -61,9 +61,7 @@ def traverse_trails(
                 if pos not in visited_peaks:
                     visited_peaks[pos] = 1
             else:
-                traverse_trails(
-                    matrix, (next_row, next_col), curr_height + 1, visited_peaks
-                )
+                traverse_trails(matrix, (next_row, next_col), curr_height + 1, visited_peaks)
     return visited_peaks
 
 

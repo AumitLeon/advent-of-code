@@ -1,4 +1,4 @@
-from .solution import parse_input, count_trails, count_ratings
+from .solution import count_ratings, count_trails, parse_input
 
 
 def test_parse_input():

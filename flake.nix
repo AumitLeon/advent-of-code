@@ -43,6 +43,10 @@
             if [ -d ".venv" ]; then
               echo "✓ Activating virtual environment (.venv)"
               source .venv/bin/activate
+
+              # Ensure nix tools (ruff, pre-commit) take precedence over venv versions
+              # This fixes issues with dynamically linked binaries on NixOS
+              export PATH="${pkgs.ruff}/bin:${pkgs.pre-commit}/bin:$PATH"
             else
               echo "ℹ No virtual environment found. Create one with:"
               echo "  uv sync    # Creates venv, lockfile, and installs dependencies"

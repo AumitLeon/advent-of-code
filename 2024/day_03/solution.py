@@ -1,6 +1,6 @@
+import re
 from pathlib import Path
 from typing import List
-import re
 
 
 def parse_input() -> List[List[int]]:
@@ -31,9 +31,7 @@ def multiply_part2(instructions: List[str]) -> int:
         # The regex pattern below matches "do()"
         # OR "mul" followed by a number made of 1-3 digits, followed by "," followed by another number made of 1-3 digits,
         # OR "don't()"
-        matches = re.findall(
-            r"do\(\)|mul\([0-9]{1,3},[0-9]{1,3}\)|don't\(\)", instruction
-        )
+        matches = re.findall(r"do\(\)|mul\([0-9]{1,3},[0-9]{1,3}\)|don't\(\)", instruction)
         for match in matches:
             if match == "do()":
                 do = True

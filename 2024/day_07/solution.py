@@ -1,6 +1,6 @@
+import itertools
 from pathlib import Path
 from typing import List, Tuple
-import itertools
 
 
 def parse_input() -> Tuple[List[List[str]], Tuple[int, int]]:
@@ -33,14 +33,10 @@ def part_1(input: List[str]) -> int:
                     operator = operator_order[idx]
                     if idx == 0:
                         if operator == "+":
-                            result_for_combo = int(operands[idx]) + int(
-                                operands[idx + 1]
-                            )
+                            result_for_combo = int(operands[idx]) + int(operands[idx + 1])
 
                         elif operator == "*":
-                            result_for_combo = int(operands[idx]) * int(
-                                operands[idx + 1]
-                            )
+                            result_for_combo = int(operands[idx]) * int(operands[idx + 1])
                     else:
                         if operator == "+":
                             result_for_combo += int(operands[idx + 1])
@@ -64,14 +60,10 @@ def part_2(input: List[str]) -> int:
                     operator = operator_order[idx]
                     if idx == 0:
                         if operator == "+":
-                            result_for_combo = int(operands[idx]) + int(
-                                operands[idx + 1]
-                            )
+                            result_for_combo = int(operands[idx]) + int(operands[idx + 1])
 
                         elif operator == "*":
-                            result_for_combo = int(operands[idx]) * int(
-                                operands[idx + 1]
-                            )
+                            result_for_combo = int(operands[idx]) * int(operands[idx + 1])
                         elif operator == "||":
                             result_for_combo = int(operands[idx] + operands[idx + 1])
 
@@ -81,9 +73,7 @@ def part_2(input: List[str]) -> int:
                         elif operator == "*":
                             result_for_combo *= int(operands[idx + 1])
                         elif operator == "||":
-                            result_for_combo = int(
-                                str(result_for_combo) + operands[idx + 1]
-                            )
+                            result_for_combo = int(str(result_for_combo) + operands[idx + 1])
 
             if result_for_combo == int(result):
                 results.append(int(result))

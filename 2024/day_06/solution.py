@@ -1,6 +1,7 @@
-from pathlib import Path
-from typing import List, Tuple, Dict
 from copy import deepcopy
+from pathlib import Path
+from typing import Dict, List, Tuple
+
 from tqdm import tqdm
 
 
@@ -68,17 +69,13 @@ def get_new_orientation(current_orientation: str):
         return "NORTH"
 
 
-def count_visited(
-    matrix: List[List[str]], coords: Tuple[int, int], orientation: str
-) -> int:
+def count_visited(matrix: List[List[str]], coords: Tuple[int, int], orientation: str) -> int:
     # Mark the starting position
     matrix = visit(coords[0], coords[1], matrix)
     visited = 1
 
     # Locate the next position.
-    first_position = get_next_position(
-        x=coords[0], y=coords[1], orientation=orientation
-    )
+    first_position = get_next_position(x=coords[0], y=coords[1], orientation=orientation)
     x = first_position[0]
     y = first_position[1]
 
@@ -219,9 +216,7 @@ if __name__ == "__main__":
     # We modify the matrix in part 1 in place, so make a deep copy for part 2.
     matrix_for_part2 = deepcopy(matrix)
 
-    result_part1 = count_visited(
-        matrix=matrix, coords=start_coords, orientation="NORTH"
-    )
+    result_part1 = count_visited(matrix=matrix, coords=start_coords, orientation="NORTH")
     print(f"Solution for part 1: {result_part1}")
 
     loops = find_possible_loops(matrix_for_part2, start_coords)

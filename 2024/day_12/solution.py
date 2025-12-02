@@ -1,6 +1,6 @@
+from copy import deepcopy
 from pathlib import Path
 from typing import List, Tuple
-from copy import deepcopy
 
 
 def parse_input() -> List[List[str]]:
@@ -28,9 +28,7 @@ def mark_visited(matrix: List[List[str]], coords: Tuple[int, int], current_char:
     matrix[row][col] = current_char.lower()
 
 
-def is_valid_position(
-    matrix: List[List[str]], coords: Tuple[int, int], current_char: str
-) -> bool:
+def is_valid_position(matrix: List[List[str]], coords: Tuple[int, int], current_char: str) -> bool:
     row, col = coords
     matrix_col_dimension = len(matrix[0])
     matrix_row_dimension = len(matrix)
@@ -50,20 +48,13 @@ def is_edge(matrix: List[List[str]], coords: Tuple[int, int]) -> bool:
     row, col = coords
     matrix_col_dimension = len(matrix[0])
     matrix_row_dimension = len(matrix)
-    if (
-        0 > col
-        or col > matrix_col_dimension - 1
-        or 0 > row
-        or row > matrix_row_dimension - 1
-    ):
+    if 0 > col or col > matrix_col_dimension - 1 or 0 > row or row > matrix_row_dimension - 1:
         return True
     else:
         return False
 
 
-def traverse_plots(
-    start_coords: Tuple[int, int], matrix: List[List[str]], current_char: str
-):
+def traverse_plots(start_coords: Tuple[int, int], matrix: List[List[str]], current_char: str):
     start_row, start_col = start_coords
     mark_visited(matrix, (start_row, start_col), current_char)
     visited = 1
@@ -81,10 +72,7 @@ def traverse_plots(
             visited += traversal_visited
             touched += traveral_touched
         else:
-            if (
-                is_edge(matrix, pos)
-                or matrix[next_row][next_col] != current_char.lower()
-            ):
+            if is_edge(matrix, pos) or matrix[next_row][next_col] != current_char.lower():
                 touched += 1
     return visited, touched
 
@@ -125,10 +113,7 @@ def count_corners(
     matrix_below_left = safe_get_matrix_position(matrix, diagonals[3])
 
     # Concave Top left corner
-    if (
-        matrix_left.lower() != current_char.lower()
-        and matrix_above.lower() != current_char.lower()
-    ):
+    if matrix_left.lower() != current_char.lower() and matrix_above.lower() != current_char.lower():
         corners += 1
     # Convex top left corner
     if (
@@ -171,10 +156,7 @@ def count_corners(
     ):
         corners += 1
     # Concave Bottom left corner
-    if (
-        matrix_left.lower() != current_char.lower()
-        and matrix_below.lower() != current_char.lower()
-    ):
+    if matrix_left.lower() != current_char.lower() and matrix_below.lower() != current_char.lower():
         corners += 1
 
     return corners

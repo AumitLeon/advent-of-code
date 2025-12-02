@@ -1,4 +1,4 @@
-from .solution import parse_input, compute_distances, similiarity_score
+from .solution import compute_distances, parse_input, similiarity_score
 
 
 def test_parse_input():

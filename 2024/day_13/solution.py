@@ -1,5 +1,6 @@
 from pathlib import Path
 from typing import List, Tuple
+
 import numpy as np
 
 
@@ -19,9 +20,7 @@ def parse_input(part: int) -> Tuple[List[List[int]], List[Tuple[int, int]]]:
                     x = int(split_row[1].split(",")[0].split("=")[1])
                     y = int(split_row[2].split("=")[1])
                 elif part == 2:
-                    x = int(
-                        10000000000000 + int(split_row[1].split(",")[0].split("=")[1])
-                    )
+                    x = int(10000000000000 + int(split_row[1].split(",")[0].split("=")[1]))
                     y = int(10000000000000 + int((split_row[2].split("=")[1])))
             elif split_row[0] == "Button":
                 x = int(split_row[2].split(",")[0].split("+")[1])

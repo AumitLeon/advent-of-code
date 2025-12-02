@@ -1,4 +1,4 @@
-from .solution import parse_input, part1, part2, construct_disk_map, create_tuples
+from .solution import construct_disk_map, create_tuples, parse_input, part1, part2
 
 
 def test_parse_input():

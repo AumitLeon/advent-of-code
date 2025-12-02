@@ -1,9 +1,9 @@
 from .solution import (
+    construct_ruleset,
     parse_input,
     process_updates,
-    sum_medians,
     reprocess_bad_updates,
-    construct_ruleset,
+    sum_medians,
 )
 
 

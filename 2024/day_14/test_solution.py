@@ -1,9 +1,9 @@
 from .solution import (
+    COLUMN_DIMENSION,
+    ROW_DIMENSION,
     parse_input,
     part_1,
     part_2_minimize_entropy,
-    ROW_DIMENSION,
-    COLUMN_DIMENSION,
 )
 
 
@@ -15,9 +15,7 @@ def test_parse_input():
 def test_part_1():
     robots = parse_input()
     assert (
-        part_1(
-            robots=robots, row_dimension=ROW_DIMENSION, col_dimension=COLUMN_DIMENSION
-        )
+        part_1(robots=robots, row_dimension=ROW_DIMENSION, col_dimension=COLUMN_DIMENSION)
         == 229980828
     )
 

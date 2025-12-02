@@ -1,7 +1,7 @@
 from .solution import (
-    parse_input,
     get_number_of_safe_reports_part_1,
     get_number_of_safe_reports_part_2,
+    parse_input,
 )
 
 

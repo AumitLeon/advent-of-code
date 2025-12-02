@@ -63,9 +63,7 @@ def search_neighbors(
                 return search_neighbors(
                     next_char="S",
                     matrix=matrix,
-                    possible_positions=[
-                        get_possible_positions(x, y)[idx_of_possible_position]
-                    ],
+                    possible_positions=[get_possible_positions(x, y)[idx_of_possible_position]],
                     idx_of_possible_position=idx_of_possible_position,
                 )
             else:
@@ -86,9 +84,7 @@ def solution_part1(matrix: List[List[str]]) -> int:
     # Search the 8 possible positions.
     for row_idx, row in enumerate(matrix):
         for column_idx, column in enumerate(row):
-            possible_positions = get_possible_positions(
-                row_idx=row_idx, column_idx=column_idx
-            )
+            possible_positions = get_possible_positions(row_idx=row_idx, column_idx=column_idx)
             if column == "X":
                 counter += search_neighbors(
                     next_char="M", matrix=matrix, possible_positions=possible_positions
@@ -169,9 +165,7 @@ def solution_part2(matrix: List[List[str]]):
     # Search the 8 possible positions.
     for row_idx, row in enumerate(matrix):
         for column_idx, column in enumerate(row):
-            possible_positions = get_possible_positions_2(
-                row_idx=row_idx, column_idx=column_idx
-            )
+            possible_positions = get_possible_positions_2(row_idx=row_idx, column_idx=column_idx)
             if column == "A":
                 counter += search_neighbors_part2(
                     matrix=matrix, possible_positions=possible_positions

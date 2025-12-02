@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import List, Tuple, Dict
+from typing import Dict, List, Tuple
 
 
 def parse_input() -> Tuple[List[List[str]], Dict[str, Tuple[int, int]]]:
@@ -99,9 +99,9 @@ def get_antinodes_2(
         temp_row2 = temp_row2 + abs_row
         temp_col2 = temp_col2 - abs_col
 
-        while not is_out_of_bounds(
-            temp_row1, temp_col1, matrix
-        ) or not is_out_of_bounds(temp_row2, temp_col2, matrix):
+        while not is_out_of_bounds(temp_row1, temp_col1, matrix) or not is_out_of_bounds(
+            temp_row2, temp_col2, matrix
+        ):
             if not is_out_of_bounds(temp_row1, temp_col1, matrix):
                 antinodes.append((temp_row1, temp_col1))
                 temp_row1 = temp_row1 - abs_row
@@ -117,9 +117,9 @@ def get_antinodes_2(
         temp_col1 = temp_col1 - abs_col
         temp_row2 = temp_row2 + abs_row
         temp_col2 = temp_col2 + abs_col
-        while not is_out_of_bounds(
-            temp_row1, temp_col1, matrix
-        ) or not is_out_of_bounds(temp_row2, temp_col2, matrix):
+        while not is_out_of_bounds(temp_row1, temp_col1, matrix) or not is_out_of_bounds(
+            temp_row2, temp_col2, matrix
+        ):
             if not is_out_of_bounds(temp_row1, temp_col1, matrix):
                 antinodes.append((temp_row1, temp_col1))
                 temp_row1 = temp_row1 - abs_row

@@ -1,4 +1,4 @@
-from .solution import parse_input, multiply, multiply_part2
+from .solution import multiply, multiply_part2, parse_input
 
 
 def test_parse_input():

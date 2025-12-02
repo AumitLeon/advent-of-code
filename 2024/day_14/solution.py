@@ -1,11 +1,11 @@
 from pathlib import Path
 from typing import List
-import numpy as np
-from tqdm import tqdm
-from scipy.stats import entropy
-import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation, PillowWriter
 
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.animation import FuncAnimation, PillowWriter
+from scipy.stats import entropy
+from tqdm import tqdm
 
 ROW_DIMENSION = 103
 COLUMN_DIMENSION = 101
@@ -32,9 +32,7 @@ class Robot:
 
 
 class Board:
-    def __init__(
-        self, robots, row_dimension=ROW_DIMENSION, col_dimension=COLUMN_DIMENSION
-    ):
+    def __init__(self, robots, row_dimension=ROW_DIMENSION, col_dimension=COLUMN_DIMENSION):
         self.robots: Robot = robots
         self.positions = {}
         self.row_dimension = row_dimension
@@ -151,9 +149,7 @@ def parse_input() -> List[Robot]:
 
 
 def part_1(robots: List[Robot], row_dimension: int, col_dimension: int) -> int:
-    board = Board(
-        robots=robots, row_dimension=row_dimension, col_dimension=col_dimension
-    )
+    board = Board(robots=robots, row_dimension=row_dimension, col_dimension=col_dimension)
     for _ in tqdm(range(100)):
         board.advance_positions()
 
@@ -185,14 +181,12 @@ def measure_entropy_simple(board: List[List[int | str]]) -> bool:
 
 
 def part_2_simple_heuristic(robots, row_dimension, col_dimension):
-    board = Board(
-        robots=robots, row_dimension=row_dimension, col_dimension=col_dimension
-    )
+    board = Board(robots=robots, row_dimension=row_dimension, col_dimension=col_dimension)
     for i in tqdm(range(10000)):
         board.advance_positions()
         curr_board = board.construct_board()
         if measure_entropy_simple(curr_board):
-            print(f"Iteration: {i+1}")
+            print(f"Iteration: {i + 1}")
             board.print_board()
 
 
@@ -223,9 +217,7 @@ def compute_entropy(board: List[List[int | str]]) -> float:
 def part_2_minimize_entropy(
     robots: List[Robot], row_dimension: int, col_dimension: int, iterations: int
 ) -> int:
-    board = Board(
-        robots=robots, row_dimension=row_dimension, col_dimension=col_dimension
-    )
+    board = Board(robots=robots, row_dimension=row_dimension, col_dimension=col_dimension)
     entropies = []
     for _ in tqdm(range(iterations)):
         board.advance_positions()
@@ -237,21 +229,15 @@ def part_2_minimize_entropy(
     return entropies.index(min_entropy) + 1
 
 
-def part_2_animate(
-    robots: List[Robot], row_dimension: int, col_dimension: int, iterations: int
-):
+def part_2_animate(robots: List[Robot], row_dimension: int, col_dimension: int, iterations: int):
     """
     Utility function to animate the robot movements
     """
-    board = Board(
-        robots=robots, row_dimension=row_dimension, col_dimension=col_dimension
-    )
+    board = Board(robots=robots, row_dimension=row_dimension, col_dimension=col_dimension)
     current_board = board.construct_board()
 
     # Convert the array to a numerical format for visualization
-    numerical_array = np.array(
-        [[int(x) if x != "." else 0 for x in row] for row in current_board]
-    )
+    numerical_array = np.array([[int(x) if x != "." else 0 for x in row] for row in current_board])
 
     fig, ax = plt.subplots(figsize=(8, 7))
     im = ax.imshow(numerical_array, cmap="viridis", interpolation="nearest")
@@ -275,9 +261,7 @@ def part_2_animate(
 def get_board_with_tree(
     robots: List[Robot], row_dimension: int, col_dimension: int, iteration: int
 ):
-    board = Board(
-        robots=robots, row_dimension=row_dimension, col_dimension=col_dimension
-    )
+    board = Board(robots=robots, row_dimension=row_dimension, col_dimension=col_dimension)
     for _ in range(iteration + 1):
         # plt.figure(figsize=(10, 10))
         if _ == iteration:
@@ -287,9 +271,7 @@ def get_board_with_tree(
 
 def visualize_tree(array: List[List[int | str]], iteration: int):
     # Convert the array to a numerical format for visualization
-    numerical_array = np.array(
-        [[int(x) if x != "." else 0 for x in row] for row in array]
-    )
+    numerical_array = np.array([[int(x) if x != "." else 0 for x in row] for row in array])
 
     plt.clf()  # Clear the current figure
     plt.imshow(numerical_array, cmap="viridis", interpolation="nearest")

@@ -1,4 +1,4 @@
-from .solution import parse_input, count_visited, find_possible_loops
+from .solution import count_visited, find_possible_loops, parse_input
 
 
 def test_parse_input():
@@ -9,10 +9,7 @@ def test_parse_input():
 
 def test_count_visited():
     matrix, starting_coords = parse_input()
-    assert (
-        count_visited(matrix=matrix, coords=starting_coords, orientation="NORTH")
-        == 4789
-    )
+    assert count_visited(matrix=matrix, coords=starting_coords, orientation="NORTH") == 4789
 
 
 def test_find_possible_loops():

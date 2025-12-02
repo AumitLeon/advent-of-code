@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import List, Tuple, Dict
+from typing import Dict, List, Tuple
 
 
 def parse_input() -> Tuple[List[str], List[str]]:
@@ -77,9 +77,7 @@ def sum_medians(good_updates: List[str]) -> int:
     return result
 
 
-def reprocess_bad_updates(
-    bad_updates: List[str], rules: Dict[str, List[str]]
-) -> List[str]:
+def reprocess_bad_updates(bad_updates: List[str], rules: Dict[str, List[str]]) -> List[str]:
     good_updates = []
     for update in bad_updates:
         corrected_update = []
@@ -89,11 +87,7 @@ def reprocess_bad_updates(
             later_pages = rules[page]
             # Get the index of the the earliest page in the corrected string of the pages that are greater than the current page.
             page_idx = min(
-                (
-                    corrected_update.index(p)
-                    for p in later_pages
-                    if p in corrected_update
-                ),
+                (corrected_update.index(p) for p in later_pages if p in corrected_update),
                 default=-1,
             )
             if page_idx != -1:

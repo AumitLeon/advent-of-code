@@ -1,6 +1,7 @@
-from pathlib import Path
-from typing import Tuple, List
 from copy import deepcopy
+from pathlib import Path
+from typing import List, Tuple
+
 from tqdm import tqdm
 
 
@@ -139,9 +140,7 @@ def part2(tuples: List[Tuple[int, Tuple[int, int]]]):
                     (fwd[1][0], 0),
                 )
 
-                new_map_copy.insert(
-                    int_idx + 1, (rev[0], (rev[1][0], fwd[1][1] - rev[1][0]))
-                )
+                new_map_copy.insert(int_idx + 1, (rev[0], (rev[1][0], fwd[1][1] - rev[1][0])))
                 tracker[rev[0]] = (rev[0], (rev[1][0], fwd[1][1] - rev[1][0]))
                 break
         processed_files.add(rev[0])

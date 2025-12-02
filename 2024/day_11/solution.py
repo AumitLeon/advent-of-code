@@ -1,8 +1,9 @@
+from copy import deepcopy
+from functools import cache
 from pathlib import Path
 from typing import List
-from copy import deepcopy
+
 from tqdm import tqdm
-from functools import cache
 
 
 def parse_input() -> List[str]:

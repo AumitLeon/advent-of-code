@@ -26,13 +26,14 @@
             # Language server
             python.pkgs.python-lsp-server
 
-            # C++ standard library for numpy and scipy
+            # C++ standard library and zlib for numpy and scipy
             stdenv.cc.cc.lib
+            zlib
           ];
 
           shellHook = ''
-            # Add C++ standard library to LD_LIBRARY_PATH for numpy/scipy
-            export LD_LIBRARY_PATH="${pkgs.stdenv.cc.cc.lib}/lib:$LD_LIBRARY_PATH"
+            # Add C++ standard library and zlib to LD_LIBRARY_PATH for numpy/scipy
+            export LD_LIBRARY_PATH="${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.zlib}/lib:$LD_LIBRARY_PATH"
 
             echo "🐍 Python development environment with uv 🐍"
             echo "Python version: $(python --version)"
